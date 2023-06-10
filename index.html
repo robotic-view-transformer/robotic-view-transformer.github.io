@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="RVT: Robotic View Transformer for 3D Object Manipulation">
+  <meta name="keywords" content="RVT, Robotic Transformer, Robotic View Tranfomer, Robotics, Transformer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RVT: Robotic View Transformer for 3D Object Manipulation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://imankgoyal.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://imankgoyal.github.io/ifor.html">
+		  IFOR
+          </a>
+          <a class="navbar-item" href="https://github.com/princeton-vl/SimpleView">
+		  SimpleView
+          </a>
+          <a class="navbar-item" href="https://github.com/imankgoyal/NonDeepNetworks">
+		  Non-Deep Networks
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">RVT: Robotic View Transformer for 3D Object Manipulation</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+	      <a href="https://imankgoyal.github.io/">Ankit Goyal</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+	      <a href="https://people.csail.mit.edu/jiex">Jie Xu</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+	      <a href="https://www.guoyijie.me/">Yijie Guo</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+	      <a href="https://www.cs.cornell.edu/~valts/">Valts Blukis</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+	      <a href="https://research.nvidia.com/person/yu-wei-chao">Yu-Wei Chao</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+            <span class="author-block">
+	      <a href="https://homes.cs.washington.edu/~fox/">Dieter Fox</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+		<br>
+		<a href="https://www.nvidia.com/en-us/"><img src="./figs/nvidia.png" width="300px"></a>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2202.00732"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/mIQN4f3KSA8"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/nvlabs/rvt"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <center>
+      <figure style="width:400px"><br>
+        <a href="./real_world/real_world.gif"><img src="./real_world/real_world.gif" width="400px"></a>
+      </figure>
+      </center>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">RVT</span> is a 3D manipulation system that outpeforms existing solutions while being an order of manitude more scalable. It solve 3D manipulation tasks with just a few (~10) demonstration per task.
+      </h2>
+    </div>
+  </div>
+  <hr>
+</section>
+
+<!-- <section class="hero is-light is-small"> -->
+<!--   <div class="hero-body"> -->
+<!--     <div class="container"> -->
+<!--       <div id="results-carousel" class="carousel results-carousel"> -->
+<!--         <div class="item item-steve"> -->
+<!--           <video poster="" id="steve" autoplay controls muted loop playsinline height="100%"> -->
+<!--             <source src="./static/videos/steve.mp4" -->
+<!--                     type="video/mp4"> -->
+<!--           </video> -->
+<!--         </div> -->
+<!--         <div class="item item-chair-tp"> -->
+<!--           <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%"> -->
+<!--             <source src="./static/videos/chair-tp.mp4" -->
+<!--                     type="video/mp4"> -->
+<!--           </video> -->
+<!--         </div> -->
+<!--         <div class="item item-shiba"> -->
+<!--           <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%"> -->
+<!--             <source src="./static/videos/shiba.mp4" -->
+<!--                     type="video/mp4"> -->
+<!--           </video> -->
+<!--         </div> -->
+<!--         <div class="item item-fullbody"> -->
+<!--           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%"> -->
+<!--             <source src="./static/videos/fullbody.mp4" -->
+<!--                     type="video/mp4"> -->
+<!--           </video> -->
+<!--         </div> -->
+<!--         <div class="item item-blueshirt"> -->
+<!--           <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%"> -->
+<!--             <source src="./static/videos/blueshirt.mp4" -->
+<!--                     type="video/mp4"> -->
+<!--           </video> -->
+<!--         </div> -->
+<!--         <div class="item item-mask"> -->
+<!--           <video poster="" id="mask" autoplay controls muted loop playsinline height="100%"> -->
+<!--             <source src="./static/videos/mask.mp4" -->
+<!--                     type="video/mp4"> -->
+<!--           </video> -->
+<!--         </div> -->
+<!--         <div class="item item-coffee"> -->
+<!--           <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%"> -->
+<!--             <source src="./static/videos/coffee.mp4" -->
+<!--                     type="video/mp4"> -->
+<!--           </video> -->
+<!--         </div> -->
+<!--         <div class="item item-toby"> -->
+<!--           <video poster="" id="toby" autoplay controls muted loop playsinline height="100%"> -->
+<!--             <source src="./static/videos/toby2.mp4" -->
+<!--                     type="video/mp4"> -->
+<!--           </video> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/mIQN4f3KSA8?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!--/ Paper video. -->
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Summary</h2>
+	<p>
+	    <figure>
+	    <a href="./figs/method.png"><img src="./figs/method.png"></a>
+	    </figure>
+        </p>
+        <div class="content has-text-justified">
+         <p>
+    	 For 3D object manipulation, methods that build an explicit 3D representation perform better than those relying only on camera images. 
+	 But using explicit 3D representations like voxels comes at large computing cost, adversely affecting scalability. 
+         </p>
+         <p>
+    	 We propose RVT, a multi-view transformer for 3D manipulation that is both scalable and accurate. 
+	 In simulations, we find that a single RVT model works well across 18 RLBench tasks with 249 task variations, achieving 26% higher relative success than existing state-of-the-art method (PerAct). 
+	 It also trains 36X faster than PerAct for achieving the same performance and achieves 2.3X the inference speed of PerAct. 
+	 Further, RVT can perform a variety of manipulation tasks in the real world with just a few (~10) demonstrations per task.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+<hr>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Real World Videos (2X Default Speed)</h2>
+    <h2 class="title is-4">Put Object in Drawer</h2>
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+	    <source src="real_world/drawer_succ_3.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+          </video>
+          <p>
+	  Success: Put orange bottle in drawer
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+	    <source src="real_world/drawer_succ_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+          </video>
+          <p>
+	  Success: Put orange bottle in drawer
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+	    <source src="real_world/drawer_succ_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+          </video>
+          <p>
+	  Success: Put orange bottle in drawer
+          </p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+            <source src="real_world/drawer_fail_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+          </video>
+          <p>
+	  Failure: Put blue marker in drawer
+          </p>
+        </div>
+      </div>
+    </div>
+    
+<h2 class="title is-4">Put Object in Shelf</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/shelf_succ_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Put yellow block in top shelf
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/shelf_succ_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Put yellow block in bottom shelf
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/shelf_succ_3.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Put yellow block in top shelf
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/shelf_fail_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: Put yellow block in top shelf
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2 class="title is-4">Stack Blocks</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/block_succ_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Put yellow block on blue block
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/block_succ_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Put blue block on red block
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/block_succ_3.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Put red block on yellow block
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2 class="title is-4">Press Sanitizer</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/sani_succ_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Press Sanitizer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/sani_succ_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Press Sanitizer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/sani_succ_3.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: Press Sanitizer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/sani_fail_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: Press Sanitizer
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2 class="title is-4">Put Marker in Bowl/Mug</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/marker_fail_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: Put green marker in bowl
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/marker_fail_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: Put blue marker in bowl
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="real_world/marker_fail_3.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: Put green marker in mug
+      </p>
+    </div>
+  </div>
+</div>
+    
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Simulation Videos</h2>
+
+<h2 class="title is-4">Put in Drawer</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_item_in_drawer_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the item in the top drawer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_item_in_drawer_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the item in the bottom drawer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_item_in_drawer_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the item in the top drawer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_item_in_drawer_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: put the item in the middle drawer
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2 class="title is-4">Sweep to Dustpan</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/sweep_to_dustpan_of_size_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: sweep dirt to the short dustpan
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/sweep_to_dustpan_of_size_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: sweep dirt to the short dustpan
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/sweep_to_dustpan_of_size_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: sweep dirt to the tall dustpan
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/sweep_to_dustpan_of_size_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: sweep dirt to the tall dustpan
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Meat off Grill</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/meat_off_grill_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: take the steak off the grill
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/meat_off_grill_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: take the steak off the grill
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/meat_off_grill_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: take the steak off the grill
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/meat_off_grill_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: take the steak off the grill
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Open Drawer</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/open_drawer_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: open the top drawer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/open_drawer_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: open the middle drawer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/open_drawer_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: open the bottom drawer
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/open_drawer_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: open the top drawer
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Turn Tap</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/turn_tap_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: turn right tap
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/turn_tap_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: turn left tap
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/turn_tap_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: turn left tap
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/turn_tap_success_3.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: turn right tap
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Close Jar</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/close_jar_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: close the cyan jar
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/close_jar_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: close the orange jar
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/close_jar_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: close the navy jar
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/close_jar_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: close the red jar
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2 class="title is-4">Drag Stick</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/reach_and_drag_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: use the stick to drag the cube onto the navy target
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/reach_and_drag_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: use the stick to drag the cube onto the gray target
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/reach_and_drag_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: use the stick to drag the cube onto the red target
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/reach_and_drag_success_3.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: use the stick to drag the cube onto the silver target
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2 class="title is-4">Stack Blocks</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/stack_blocks_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack 3 teal blocks
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/stack_blocks_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack 3 gray blocks
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/stack_blocks_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack 4 navy blocks
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/stack_blocks_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: stack 2 maroon blocks
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Screw Bulb</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/light_bulb_in_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: screw in the rose light bulb
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/light_bulb_in_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: screw in the gray light bulb
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/light_bulb_in_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: screw in the violet light bulb
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/light_bulb_in_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: screw in the silver light bulb
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Slide Block</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/slide_block_to_color_target_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: slide the block to pink target
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/slide_block_to_color_target_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: slide the block to yellow target
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/slide_block_to_color_target_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: slide the block to green target
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/slide_block_to_color_target_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: slide the block to pink target
+      </p>
+    </div>
+  </div>
+</div>
+
+<h2 class="title is-4">Put in Safe</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_money_in_safe_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the money away in the safe on the top shelf
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_money_in_safe_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the money away in the safe on the bottom shelf
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_money_in_safe_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the money away in the safe on the middle shelf
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_money_in_safe_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: put the money away in the safe on the top shelf
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Place Wine</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_wine_at_rack_location_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack the wine bottle to the left of the rack
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_wine_at_rack_location_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack the wine bottle to the middle of the rack
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_wine_at_rack_location_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack the wine bottle to the right of the rack
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_wine_at_rack_location_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: stack the wine bottle to the middle of the rack
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Put in Cupboard</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_groceries_in_cupboard_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the coffee in the cupboard
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_groceries_in_cupboard_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the mustard in the cupboard
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_groceries_in_cupboard_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the chocolate jello in the cupboard
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/put_groceries_in_cupboard_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: put the coffee in the cupboard
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Sort Shape</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_shape_in_shape_sorter_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the cylinder in the shape sorter
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_shape_in_shape_sorter_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the star in the shape sorter
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_shape_in_shape_sorter_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the moon in the shape sorter
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_shape_in_shape_sorter_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: put the star in the shape sorter
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Push Buttons</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/push_buttons_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: push the maroon button, then push the green button, then push the navy button
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/push_buttons_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: push the maroon button
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/push_buttons_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: push the maroon button
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/push_buttons_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: push the maroon button
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Insert Peg</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/insert_onto_square_peg_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the ring on the violet spoke
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/insert_onto_square_peg_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: put the ring on the black spoke
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/insert_onto_square_peg_fail_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: put the ring on the green spoke
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/insert_onto_square_peg_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: put the ring on the azure spoke
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Stack Cups</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/stack_cups_success_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack the other cups on top of the lime cup
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/stack_cups_success_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack the other cups on top of the gray cup
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/stack_cups_success_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Success: stack the other cups on top of the red cup
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/stack_cups_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: stack the other cups on top of the maroon cup
+      </p>
+    </div>
+  </div>
+</div>
+<h2 class="title is-4">Place Cups</h2>
+<div class="columns is-centered">
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_cups_fail_0.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: place 3 cups on the cup holder
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_cups_fail_1.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: place 2 cups on the cup holder
+      </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+      <video id="dollyzoom" autoplay="" controls="" muted="" loop="" playsinline="" height="100%" onloadstart="this.playbackRate=2">
+        <source src="simulation/place_cups_fail_2.mp4" type="video/mp4" class="figure-img img-fluid rounded">
+      </video>
+      <p>
+        Failure: place 2 cups on the cup holder
+      </p>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{goyal2023rvt,
+  author    = {Goyal, Ankit and Xu, Jie and Guo, Yijie and Blukis, Valts and Chao, Yu-Wei and Fox, Dieter},
+  title     = {RVT: Robotic View Transformer for 3D Object Manipulation},
+  journal   = {arXiv},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/pdf/2011.12948">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/nvlabs/rvt" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Based on the awesome opesource template <a
+              href="https://github.com/nerfies/nerfies.github.io">from here.</a>          
+	  </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
