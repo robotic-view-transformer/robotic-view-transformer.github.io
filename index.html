@@ -231,8 +231,8 @@
 	 But using explicit 3D representations like voxels comes at large computing cost, adversely affecting scalability. 
          </p>
          <p>
-    	 We propose RVT, a multi-view transformer for 3D manipulation that is both scalable and accurate. 
-	 In simulations, we find that a single RVT model works well across 18 RLBench tasks with <strong>249 task variations</strong>, achieving <strong>26% higher relative success</strong> than existing state-of-the-art method (PerAct). 
+    	 We propose RVT, a multi-view transformer for 3D manipulation that is both scalable and accurate. RVT takes camera images and task language description as inputs and predicts the gripper pose action.
+	 In simulations, we find that a single RVT model works well across <strong>18 RLBench tasks </strong> with <strong>249 task variations</strong>, achieving <strong>26% higher relative success</strong> than existing state-of-the-art method (PerAct). 
 	 It also trains <strong>36X faster</strong> than PerAct for achieving the same performance and achieves 2.3X the inference speed of PerAct. 
 	 Further, RVT can perform a variety of manipulation tasks in the real world with just a few (~10) demonstrations per task.
           </p>
@@ -246,9 +246,15 @@
 
 
 <section class="section">
+  
   <div class="container is-max-desktop">
-    <h2 class="title is-3">Real World Videos (2X Default Speed)</h2>
-    <h2 class="title is-4">Put Object in Drawer</h2>
+    <div class="columns is-centered has-text-centered">
+      <h2 class="title is-3">Experiment Results</h2>
+    </div>
+    <p>We trained a single RVT model from real world data and a single RVT model from RLBench simulation data. In both settings, the single trained RVT model is used to evaluate the performance on all tasks.</p>
+    <br>
+    <h2 class="title is-4">Real World Videos (2X Default Speed)</h2>
+    <h2 class="title is-5">Put Object in Drawer</h2>
     <div class="columns is-centered">
       <div class="column">
         <div class="content">
@@ -292,7 +298,7 @@
       </div>
     </div>
     
-<h2 class="title is-4">Put Object in Shelf</h2>
+<h2 class="title is-5">Put Object in Shelf</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -336,7 +342,7 @@
   </div>
 </div>
 
-<h2 class="title is-4">Stack Blocks</h2>
+<h2 class="title is-5">Stack Blocks</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -370,7 +376,7 @@
   </div>
 </div>
 
-<h2 class="title is-4">Press Sanitizer</h2>
+<h2 class="title is-5">Press Sanitizer</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -414,7 +420,7 @@
   </div>
 </div>
 
-<h2 class="title is-4">Put Marker in Bowl/Mug</h2>
+<h2 class="title is-5">Put Marker in Bowl/Mug</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -453,9 +459,9 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3">Simulation Videos</h2>
+    <h2 class="title is-4">Simulation Videos</h2>
 
-<h2 class="title is-4">Put in Drawer</h2>
+<h2 class="title is-5">Put in Drawer</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -499,7 +505,7 @@
   </div>
 </div>
 
-<h2 class="title is-4">Sweep to Dustpan</h2>
+<h2 class="title is-5">Sweep to Dustpan</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -542,7 +548,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Meat off Grill</h2>
+<h2 class="title is-5">Meat off Grill</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -585,7 +591,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Open Drawer</h2>
+<h2 class="title is-5">Open Drawer</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -628,7 +634,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Turn Tap</h2>
+<h2 class="title is-5">Turn Tap</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -671,7 +677,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Close Jar</h2>
+<h2 class="title is-5">Close Jar</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -715,7 +721,7 @@
   </div>
 </div>
 
-<h2 class="title is-4">Drag Stick</h2>
+<h2 class="title is-5">Drag Stick</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -759,7 +765,7 @@
   </div>
 </div>
 
-<h2 class="title is-4">Stack Blocks</h2>
+<h2 class="title is-5">Stack Blocks</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -802,7 +808,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Screw Bulb</h2>
+<h2 class="title is-5">Screw Bulb</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -845,7 +851,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Slide Block</h2>
+<h2 class="title is-5">Slide Block</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -889,7 +895,7 @@
   </div>
 </div>
 
-<h2 class="title is-4">Put in Safe</h2>
+<h2 class="title is-5">Put in Safe</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -932,7 +938,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Place Wine</h2>
+<h2 class="title is-5">Place Wine</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -975,7 +981,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Put in Cupboard</h2>
+<h2 class="title is-5">Put in Cupboard</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -1018,7 +1024,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Sort Shape</h2>
+<h2 class="title is-5">Sort Shape</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -1061,7 +1067,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Push Buttons</h2>
+<h2 class="title is-5">Push Buttons</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -1104,7 +1110,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Insert Peg</h2>
+<h2 class="title is-5">Insert Peg</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -1147,7 +1153,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Stack Cups</h2>
+<h2 class="title is-5">Stack Cups</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
@@ -1190,7 +1196,7 @@
     </div>
   </div>
 </div>
-<h2 class="title is-4">Place Cups</h2>
+<h2 class="title is-5">Place Cups</h2>
 <div class="columns is-centered">
   <div class="column">
     <div class="content">
